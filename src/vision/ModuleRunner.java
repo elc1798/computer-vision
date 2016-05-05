@@ -31,14 +31,16 @@ public class ModuleRunner {
                         if (captureSourceMap.captureSource.isOpened()) {
                             Mat frame = captureSourceMap.captureSource.read();
                             if (frame == null) {
-                                // FIXME: We're reinitializing the capture source so we can loop it when we've reached
-                                // the end of the stream. The proper method would be to set the frame pointer for the
-                                // source to point back to the beginning of the stream, but this method does not
+                                // FIXME: We're reinitializing the capture
+                                // source so we can loop it when we've reached
+                                // the end of the stream. The proper method
+                                // would be to set the frame pointer for the
+                                // source to point back to the beginning of the
+                                // stream, but this method does not
                                 // reliably work.
                                 captureSourceMap.captureSource.reinitializeCaptureSource();
                                 DebugPrinter.println("Looping capture source");
-                            }
-                            else {
+                            } else {
                                 for (VisionModule module : captureSourceMap.modules) {
                                     Thread t = new Thread(new Runnable() {
                                         @Override
@@ -46,7 +48,8 @@ public class ModuleRunner {
                                             long start = System.currentTimeMillis();
                                             module.run(frame);
                                             long duration = System.currentTimeMillis() - start;
-                                            //DebugPrinter.println(module.getName() + ": " + duration + " ms");
+                                            // DebugPrinter.println(module.getName()
+                                            // + ": " + duration + " ms");
                                         }
                                     }, module.getName() + " Thread");
                                     t.setDaemon(true);
@@ -57,8 +60,7 @@ public class ModuleRunner {
                     }
                     try {
                         Thread.sleep(1000 / FPS);
-                    }
-                    catch (InterruptedException e) {
+                    } catch (InterruptedException e) {
                         break;
                     }
                 }
