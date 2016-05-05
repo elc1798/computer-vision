@@ -25,6 +25,7 @@ public class VisionModuleSuite {
                 ModuleRunner.addMapping(new DeviceCaptureSource(0), new FaceDetectModule());
                 break;
             case 2:
+                ModuleRunner.addMapping(new DeviceCaptureSource(0), new VisionModule2());
             default:
                 break;
         }

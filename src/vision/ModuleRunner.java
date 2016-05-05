@@ -22,6 +22,7 @@ public class ModuleRunner {
             File directory = new File(path);
             assert (directory.isDirectory());
             File[] files = directory.listFiles();
+            if (files == null) continue;
             for (File f : files) {
                 if (f.getName().contains("java") && f.getName().contains(".so")) {
                     possibleFiles.add(f.getAbsolutePath());
