@@ -1,11 +1,12 @@
 package vision;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
-import gui.Main;
 import util.DebugPrinter;
 
 public class ModuleRunner {
@@ -15,7 +16,37 @@ public class ModuleRunner {
     static {
         DebugPrinter.println("OpenCV version: " + Core.VERSION);
         DebugPrinter.println("Native library path: " + System.getProperty("java.library.path"));
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        // Load OpenCV Library
+        ArrayList<String> possibleFiles = new ArrayList<String>();
+        for (String path : System.getProperty("java.library.path").split(":")) {
+            File directory = new File(path);
+            assert (directory.isDirectory());
+            File[] files = directory.listFiles();
+            for (File f : files) {
+                if (f.getName().contains("java") && f.getName().contains(".so")) {
+                    possibleFiles.add(f.getAbsolutePath());
+                }
+            }
+        }
+        DebugPrinter.println("FOUND POSSIBLE JAVA LINKED LIBRARIES: " + possibleFiles.toString());
+        boolean success = false;
+        for (String possibility : possibleFiles) {
+            if (success) break;
+            try {
+                System.load(possibility);
+                success = true;
+            } catch (Exception e) {
+                DebugPrinter.println(possibility + " Failed to load");
+            }
+        }
+        if (!success) {
+            try {
+                System.load("/Users/photoXin/Development/cv-demo/lib/opencv-3.1.0/build/lib/libopencv_java310.so");
+            } catch (Exception e) {
+                DebugPrinter.println("FAILED LOADING OPENCV");
+                System.exit(1);
+            }
+        }
     }
 
     public static void addMapping(CaptureSource captureSource, VisionModule... modules) {
