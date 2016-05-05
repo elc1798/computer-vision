@@ -189,3 +189,25 @@ for (int line = 0; line < 4; line++) {
 
 out of the larger for loop, and use `largestRect` instead of `r`
 
+## Area Thresholding
+
+Well we can get the points, and from the points we can do some simple math with
+the distance formula to get the height and width. Another way to do it is to
+use:
+```
+double currArea = Imgproc.contourArea(contours.get(index));
+```
+
+Yet another way is to use:
+```
+double areaOfR = r.size.height * r.size.width;
+double areaOfR = r.size.area(); // Does the same as above
+```
+where `r` is a `RotatedRect`.
+
+Using this we can also do an **aspect ratio** threshold.
+
+## Other cool things!
+
+The process and techniques demonstrated by 
+
