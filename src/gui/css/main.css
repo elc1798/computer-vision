@@ -1,0 +1,16 @@
+.slider-label {
+    -fx-font-size: 12px;
+}
+.slider-value {
+    -fx-font-size: 14px;
+}
+.boolean-label {
+	-fx-font-size: 12px;
+}
+.image-label {
+    -fx-font-size: 14px;
+}
+.image-tag {
+    -fx-font-size: 12px;
+    -fx-font-family: Monospace;
+}
