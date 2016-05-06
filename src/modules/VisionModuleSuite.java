@@ -5,7 +5,7 @@ import vision.ModuleRunner;
 
 public class VisionModuleSuite {
 
-    private static int demoID = 2;
+    private static int demoID = 3;
 
     /**
      * Add any mappings here from capture sources to vision modules
@@ -26,6 +26,8 @@ public class VisionModuleSuite {
                 break;
             case 2:
                 ModuleRunner.addMapping(new DeviceCaptureSource(0), new AdaptiveThresholding());
+            case 3:
+                ModuleRunner.addMapping(new DeviceCaptureSource(0), new CircleDetection());
             default:
                 break;
         }
