@@ -16,7 +16,7 @@ import org.opencv.imgproc.Imgproc;
 import gui.IntegerSliderVariable;
 import vision.VisionModule;
 
-public class VisionModule1 extends VisionModule {
+public class HSVThresholding extends VisionModule {
 
     public IntegerSliderVariable minHue = new IntegerSliderVariable("Min Hue", 0, 0, 255);
     public IntegerSliderVariable maxHue = new IntegerSliderVariable("Max Hue", 0, 0, 255);
